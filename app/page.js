@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function Home() {
   const [messages, setMessages] = useState([{
     role: 'assistant',
-    content: "Hi, I'm an AI assistant. How can I help you today?"
+    content: `Hi! I am your personal AI Nutrion/Fitness Coach. How can I help you today?`,
   }]);
 
   const [message, setMessage] = useState('');
@@ -22,7 +22,7 @@ export default function Home() {
     ]);
 
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch('api/chat', {
         method: "POST",
         headers: {
           'content-type': 'application/json'
@@ -57,7 +57,6 @@ export default function Home() {
       console.error("Error fetching message:", error);
     }
   };
-
   return (
     <Box
       width="100vw"
@@ -100,20 +99,14 @@ export default function Home() {
             </Box>
           ))}
         </Stack>
-        <Stack
-          direction="row"
-          spacing={2}
-        >
+        <Stack direction="row" spacing={2}>
           <TextField
             label="Message"
             fullWidth
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
-          <Button
-            variant="contained"
-            onClick={sendMessage}
-          >
+          <Button variant="contained" onClick={sendMessage}>
             Send
           </Button>
         </Stack>
@@ -121,4 +114,3 @@ export default function Home() {
     </Box>
   );
 }
-
