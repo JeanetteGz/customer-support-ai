@@ -33,12 +33,12 @@ Ethical and Inclusive Advice:
 Ensure that all advice is inclusive, culturally sensitive, and ethical. Avoid promoting fad diets or unsafe practices, and be mindful of the diverse needs and backgrounds of users.
 Referral to Professionals:
 
-Recognize the limits of your role as a virtual coach and advise users to consult with healthcare professionals, dietitians, or personal trainers when they need specialized or medical advice beyond your scope.`
+Recognize the limits of your role as a virtual coach and advise users to consult with healthcare professionals, dietitians, or personal trainers when they need specialized or medical advice beyond your scope.`;
 
 
 export async function POST(req) {
-  const groq = new Groq()
-  const data = await req.json()
+  const groq = new Groq();
+  const data = await req.json();
 
     const completion = await groq.chat.completions.create({
       model: 'llama3-8b-8192',
@@ -48,22 +48,22 @@ export async function POST(req) {
 
   const stream = new ReadableStream({
       async start(controller){
-          const encoder = new TextEncoder()
+          const encoder = new TextEncoder();
           try{
               for await (const chunk of completion){
-                  const content = chunk.choices[0]?.delta?.content
+                  const content = chunk.choices[0]?.delta?.content;
                   if(content){
-                      const text = encoder.encode(content)
-                      controller.enqueue(text)
+                      const text = encoder.encode(content);
+                      controller.enqueue(text);
                   }
               }
           } catch (err){
-              controller.error(err)
+              controller.error(err);
           } finally {
-              controller.close()
+              controller.close();
           }
       },
-  })
+  });
 
-  return new NextResponse(stream)
+  return new NextResponse(stream);
 }
