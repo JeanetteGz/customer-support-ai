@@ -57,7 +57,7 @@ export default function SignInPage() {
           
           {/* Sign-Up Option */}
           <Typography variant="h6" color="#333C4D" paragraph>
-            Don't have an account?
+            Don&rsquo;t have an account?
           </Typography>
           <Button
             variant="outlined"
