@@ -8,7 +8,6 @@ import { usePathname } from 'next/navigation';
 const Page = () => {
   const pathname = usePathname();
 
-  // Check if pathname is '/' (root URL)
   if (pathname === '/') {
     return <LandingPage />;
   }
