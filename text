@@ -1,0 +1,3 @@
+rsync -avz --exclude 'node_modules' --exclude '.git' --exclude '.env' \
+-e "ssh -i ~/.ssh/fl-jen.pem" \
+. ubuntu@ec2-18-220-242-235.us-east-2.compute.amazonaws.com:~/app
