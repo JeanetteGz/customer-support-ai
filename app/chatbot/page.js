@@ -22,7 +22,7 @@ export default function Home() {
     ]);
 
     try {
-      const response = await fetch('api/chat', {
+      const response = fetch('api/chat', {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
