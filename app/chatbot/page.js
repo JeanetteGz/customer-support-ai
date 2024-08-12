@@ -8,55 +8,44 @@ export default function Home() {
     content: `Hi! I am your personal AI Nutrition/Fitness Coach. How can I assist you today?`,
   }]);
 
-  const [message, setMessage] = useState('');
-
   const sendMessage = async () => {
-    const newMessage = message.trim();
-    if (!newMessage) return; // Prevent sending empty messages
+    setMessage('')
+    setMessages((messages)=>[
+      ...messages, 
+      {role: 'user', content: message}, 
+      {role: 'assistant', content: '',}
+    ])
 
-    setMessage('');
-    setMessages((messages) => [
-      ...messages,
-      { role: "user", content: newMessage },
-      { role: "assistant", content: '' },
-    ]);
-
-    try {
-      const response = fetch('api/chat', {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify([...messages, { role: 'user', content: newMessage }]),
-      });
-
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      let result = '';
-
-      reader.read().then(function processText({ done, value }) {
+    const response = fetch('api/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify([...messages, {role: "user", content: message}]),
+    }).then(async (res) => {
+      const reader = res.body.getReader()
+      const decoder = new TextDecoder()
+      let result = ''
+      return reader.read().then(function processText({done, value}){
         if (done) {
-          return result;
+          return result
         }
-        const text = decoder.decode(value || new Int8Array(), { stream: true });
+        const text = decoder.decode(value || new Uint8Array(), {stream: true})
         setMessages((messages) => {
-          const lastMessage = messages[messages.length - 1];
-          const otherMessages = messages.slice(0, messages.length - 1);
+          let lastMessage = messages[messages.length - 1]
+          let otherMessages = messages.slice(0, messages.length - 1)
 
           return [
-            ...otherMessages,
-            {
-              ...lastMessage,
-              content: lastMessage.content + text,
-            },
-          ];
-        });
-        return reader.read().then(processText);
-      });
-    } catch (error) {
-      console.error("Error fetching message:", error);
-    }
-  };
+            ...otherMessages, 
+            {...lastMessage, content: lastMessage.content + text},
+          ]
+        })
+        return reader.read().then(processText)
+      })
+    })
+  }
+
+  const [message, setMessage] = useState('')
 
   return (
     <Box
