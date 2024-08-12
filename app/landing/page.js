@@ -1,7 +1,7 @@
 "use client";
 import { Box, Stack, Typography, Button, Container, CssBaseline } from '@mui/material';
 
-export default function LandingPage() {
+export default function Landing() {
   return (
     <Box
       width="100vw"
