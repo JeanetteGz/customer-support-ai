@@ -24,33 +24,19 @@ export default function Landing() {
           </Typography>
 
           <Stack spacing={2} direction="row" justifyContent="center">
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: '#333C4D',
-                color: 'white',
-                borderRadius: '16px',
-                padding: '10px 20px',
-                fontSize: '16px',
-                '&:hover': {
-                  backgroundColor: '#2a2f3e', // Slightly darker on hover
-                },
-              }}
-              href="/chatbot"
-            >
-              Start Chatting
-            </Button>
+
             <Button
               variant="outlined"
               sx={{
-                color: '#333C4D',
+                color: 'white',
                 borderColor: '#333C4D',
+                backgroundColor: '#333C4D',
                 borderRadius: '16px',
                 padding: '10px 20px',
                 fontSize: '16px',
                 '&:hover': {
                   borderColor: '#2a2f3e',
-                  backgroundColor: '#e0e5e8',
+                  backgroundColor: '#001B2E',
                 },
               }}
               href="/signin"
@@ -60,14 +46,15 @@ export default function Landing() {
             <Button
               variant="outlined"
               sx={{
-                color: '#333C4D',
+                color: 'white',
                 borderColor: '#333C4D',
+                backgroundColor: '#333C4D',
                 borderRadius: '16px',
                 padding: '10px 20px',
                 fontSize: '16px',
                 '&:hover': {
                   borderColor: '#2a2f3e',
-                  backgroundColor: '#e0e5e8',
+                  backgroundColor: '#001B2E',
                 },
               }}
               href="/signup"

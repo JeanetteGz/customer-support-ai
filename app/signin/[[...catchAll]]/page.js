@@ -1,7 +1,10 @@
-"use client";
-import { Box, Stack, Typography, Button, Container, CssBaseline, TextField } from '@mui/material';
+// app/signin/[...catchAll]/page.js
 
-export default function SignInPage() {
+import React from 'react';
+import { SignIn } from '@clerk/nextjs';
+import { Box, Stack, Typography, Button, Container, CssBaseline } from '@mui/material';
+
+const SignInPage = () => {
   return (
     <Box
       width="100vw"
@@ -23,41 +26,34 @@ export default function SignInPage() {
             Access your personal AI Nutrition/Fitness Coach by signing in with your email.
           </Typography>
           
-          {/* Sign-In Form */}
-          <Stack spacing={2} width="100%">
-            <TextField
-              label="Email"
-              variant="outlined"
-              fullWidth
-              sx={{ borderRadius: '16px' }}
-            />
-            <TextField
-              label="Password"
-              type="password"
-              variant="outlined"
-              fullWidth
-              sx={{ borderRadius: '16px' }}
-            />
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: '#333C4D',
-                color: 'white',
-                borderRadius: '16px',
-                padding: '10px 20px',
-                fontSize: '16px',
-                '&:hover': {
-                  backgroundColor: '#2a2f3e',
+          {/* Clerk Sign-In Form */}
+          <SignIn
+            path="/signin"
+            routing="path"
+            signUpUrl="/signup"
+            fallbackRedirectUrl="/chatbot" // Redirect to /chatbot after sign in
+            appearance={{
+              elements: {
+                formButtonPrimary: {
+                  backgroundColor: '#333C4D',
+                  color: 'white',
+                  borderRadius: '16px',
+                  padding: '10px 20px',
+                  fontSize: '16px',
+                  '&:hover': {
+                    backgroundColor: '#2a2f3e',
+                  },
                 },
-              }}
-            >
-              Sign In
-            </Button>
-          </Stack>
+                card: {
+                  boxShadow: 'none',
+                },
+              },
+            }}
+          />
           
           {/* Sign-Up Option */}
           <Typography variant="h6" color="#333C4D" paragraph>
-            Don&rsquo;t have an account?
+            Don’t have an account?
           </Typography>
           <Button
             variant="outlined"
@@ -72,7 +68,7 @@ export default function SignInPage() {
                 backgroundColor: '#e0e5e8',
               },
             }}
-            href="/signup" // Redirect URL for sign-up
+            href="/signup"
           >
             Sign Up
           </Button>
@@ -82,3 +78,4 @@ export default function SignInPage() {
   );
 }
 
+export default SignInPage;

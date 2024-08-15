@@ -1,8 +1,9 @@
-'use client';
+// app/page.js
+"use client";
 
 import LandingPage from './landing/page';
-import SigninPage from './signin/page';
-import SignupPage from './signup/page';
+import SignInPage from './signin/[...catchAll]/page';
+import SignUpPage from './signup/[...catchAll]/page';
 import { usePathname } from 'next/navigation';
 
 const Page = () => {
@@ -11,16 +12,16 @@ const Page = () => {
   if (pathname === '/') {
     return <LandingPage />;
   }
-  
-  if (pathname === '/landing') {
-    return <LandingPage />;
-  }
-  
+
   if (pathname === '/signin') {
-    return <SigninPage />;
+    return <SignInPage />;
   }
 
-  return <SignupPage />;
+  if (pathname === '/signup') {
+    return <SignUpPage />;
+  }
+
+  return <SignUpPage />;
 };
 
 export default Page;
