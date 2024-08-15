@@ -2,8 +2,6 @@
 "use client";
 
 import LandingPage from './landing/page';
-import SignInPage from './signin/[...catchAll]/page';
-import SignUpPage from './signup/[...catchAll]/page';
 import { usePathname } from 'next/navigation';
 
 const Page = () => {
