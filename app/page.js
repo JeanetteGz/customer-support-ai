@@ -1,6 +1,7 @@
 // app/page.js
 "use client";
-
+import SignInPage from './signin/page';
+import SignUpPage from './signup/page';
 import LandingPage from './landing/page';
 import { usePathname } from 'next/navigation';
 
